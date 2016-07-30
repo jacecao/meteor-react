@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 //import { Link } from 'react-router';
 import Radium from 'radium';
 
+//import { white } from 'material-ui/styles/colors';
+import { white } from './styles/colors';
+import typography from './styles/typography';
+
 class Home extends Component {
   
   getStyles() {
@@ -19,9 +23,9 @@ class Home extends Component {
       },
       slogan: {
         textAlign: 'center',
-        color: '#fff',
+        color: white,
         textTransform: 'uppercase',
-        fontSize: '25px',
+        fontSize: typography.fontMiddleSize,
         fontWeight: '500',
         width: '100%',
         paddingTop: '50px',
