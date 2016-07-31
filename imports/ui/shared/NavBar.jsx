@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+import { Meteor } from 'meteor/meteor';
+
 import Radium from 'radium';
 import { Tabs,Tab } from 'material-ui/Tabs';
 
@@ -16,15 +19,26 @@ class NavBar extends Component {
 
 	//React生命周期方法，在组件将要挂载的时候会执行该方法
 	componentWillMount() {
+		//console.log( 'will' );
 		this.setState({
 			tabIndex: this.getSelectedIndex()
 		});
+	}
+
+	componentWillReceiveProps( nextProps ) {
+
+		setTimeout( () => {
+			this.setState({
+				tabIndex: this.getSelectedIndex()
+			});
+		}, 0);
 	}
 
 	//React Router中的context.router.isAvtive()获取当前活跃的路径
 	getSelectedIndex() {
 		return this.context.router.isActive('/', true) ? '/' :
 			this.context.router.isActive('/signup') ? '/signup' :
+			this.context.router.isActive('/account') ? '/account' :
 			this.context.router.isActive('/login') ? '/login' : '';
 	}
 
@@ -59,6 +73,7 @@ class NavBar extends Component {
 
 		};
 
+		let currentUser = Meteor.userId();
 		return (
 
 			<div style={styles.root}>
@@ -68,8 +83,12 @@ class NavBar extends Component {
 				tabItemContainerStyle={{ backgroundColor:'transparent' }}
 				>
 				    <Tab label='Home' value='/' style={styles.tab} />
-				    <Tab label='Sign Up' value='/signup' style={styles.tab} />
-				    <Tab label='Log In' value='/login' style={styles.tab} />
+				    <Tab 
+				    	label = { currentUser ? 'Account' : 'Sign up' }
+				    	value = { currentUser ? '/account' : '/signup' }
+				    	style = {styles.tab} 
+				    />
+				    <Tab label={'Log In'} value='/login' style={styles.tab} />
 				</Tabs>
 			</div>
 

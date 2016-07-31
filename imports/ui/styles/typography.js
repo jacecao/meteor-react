@@ -4,5 +4,6 @@
 export default typography = {
   fontFamily: 'sans-serif',
   fontMiddleSize: '25px',
+  fontSmallSize: '20px',
   fontWeightNormal: '300'
 };
