@@ -39,6 +39,7 @@ class AppDrawer extends Component {
 	}
 
 	render() {
+
 		let styles = {
 			header: {
 				fontFamily: typography.fontFamily,
@@ -57,6 +58,8 @@ class AppDrawer extends Component {
 			}
 		};
 
+		const currentUser = this.props.currentUser;
+
 		return(
 			<Drawer open={this.state.open}
 					docked={false}
@@ -70,8 +73,14 @@ class AppDrawer extends Component {
 				 onChange = {this.handleChange.bind(this)}
 				>
 					<ListItem value='/' primaryText='Home'/>
-					<ListItem value='/signup' primaryText='Sign up'/>
-					<ListItem value='/login' primaryText='Log in'/>
+					<ListItem
+				        value = { currentUser ? '/account' : '/signup' }
+			            primaryText = { currentUser ? 'Account' : 'Sign up' } 
+		            />
+		          	<ListItem
+			            value={ currentUser ? '/chat' : '/login' }
+			            primaryText={ currentUser ? 'Chat' : 'Log in' } 
+		            />
 				</SelectableList>	
 			</Drawer>	
 		);

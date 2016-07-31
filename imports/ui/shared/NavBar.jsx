@@ -8,6 +8,7 @@ import { Tabs,Tab } from 'material-ui/Tabs';
 //import {white, blue} from 'material-ui/styles/colors';
 import {white, blue} from '../styles/colors';
 import typography from '../styles/typography';
+import LogOutMenu from '../auth/LogOutMenu.jsx';
 
 class NavBar extends Component {
 	
@@ -39,6 +40,7 @@ class NavBar extends Component {
 		return this.context.router.isActive('/', true) ? '/' :
 			this.context.router.isActive('/signup') ? '/signup' :
 			this.context.router.isActive('/account') ? '/account' :
+			this.context.router.isActive('/chat') ? '/chat' :
 			this.context.router.isActive('/login') ? '/login' : '';
 	}
 
@@ -73,23 +75,31 @@ class NavBar extends Component {
 
 		};
 
-		let currentUser = Meteor.userId();
+		let currentUser = this.props.currentUser;
+
 		return (
 
 			<div style={styles.root}>
-				<Tabs value={this.state.tabIndex} onChange={ this.handleChange.bind(this) }
-				style={styles.tabs}
-				inkBarStyle={styles.inkBar}
-				tabItemContainerStyle={{ backgroundColor:'transparent' }}
+				<Tabs 
+					value={this.state.tabIndex} 
+				    onChange={ this.handleChange.bind(this) }
+					style={styles.tabs}
+					inkBarStyle={styles.inkBar}
+				    tabItemContainerStyle={{ backgroundColor:'transparent' }}
 				>
-				    <Tab label='Home' value='/' style={styles.tab} />
+				    <Tab label='home' value='/' style={styles.tab} />
 				    <Tab 
-				    	label = { currentUser ? 'Account' : 'Sign up' }
+				    	label = { currentUser ? 'account' : 'sign up' }
 				    	value = { currentUser ? '/account' : '/signup' }
 				    	style = {styles.tab} 
 				    />
-				    <Tab label={'Log In'} value='/login' style={styles.tab} />
+				    <Tab 
+				    	label={currentUser ? 'chat' : 'log in'} 
+				    	value={currentUser ? '/chat' : '/login'} 
+				    	style={styles.tab} 
+				    />
 				</Tabs>
+				{ currentUser ? <LogOutMenu username={this.props.userInfo ? this.props.userInfo.username: ''} /> : '' }
 			</div>
 
 		);

@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+
 import Radium from 'radium';
 
-import { Accounts } from 'meteor/accounts-base';
+import { Meteor } from 'meteor/meteor';
 
-import typography from './styles/typography';
+import typography from '../styles/typography';
 
-class SignUp extends Component {
+class LogIn extends Component {
   
   handleSubmit(e) {
     e.preventDefault();
@@ -16,17 +17,15 @@ class SignUp extends Component {
     let userName = this.refs.userName.getValue();
     let password = this.refs.password.getValue();
 
-    Accounts.createUser({
-      username: userName,
-      password: password
-    },( error ) => {
-      if( error ){
-        console.log( error.reason );
+    Meteor.loginWithPassword({username: userName}, password, (error) => {
+      if (error) {
+        console.log(error);
         return;
       }
-      this.context.router.push('/account');
+      this.context.router.push('/chat');
     });
   }
+
 
   getStyles() {
     return {
@@ -34,7 +33,7 @@ class SignUp extends Component {
         minHeight: '400px',
         textAlign: 'center',
         padding: '6em 2em',
-        '@media (min-width: 500px)' : {
+        '@media (min-width: 500px)': {
           width: '500px',
           margin: '0 auto'
         }
@@ -63,41 +62,38 @@ class SignUp extends Component {
     };
   }
 
+
   render() {
-
     let styles = this.getStyles();
-
     return (
       <div style = {styles.root}>
-        <form onSubmit = { this.handleSubmit.bind(this) } style = {styles.form}>
+        <form onSubmit = {this.handleSubmit.bind(this)} style = { styles.form}>
           <TextField
-            ref = 'userName' 
+            ref = "userName"
             style = {styles.textField}
-            floatingLabelText = '用户名'
-            floatingLabelStyle = {styles.floatingLabel}
-          />
+            floatingLabelText = "用户名"
+            floatingLabelStyle = {styles.floatingLabel} />
           <TextField
-            ref = 'password'  
-            style={styles.textField}
-            floatingLabelText = '密码'
+            ref = "password"
+            style = {styles.textField}
+            floatingLabelText = "密码"
             floatingLabelStyle = {styles.floatingLabel}
-            type = 'password'
-          />
+            type = "password" />
           <RaisedButton
             style = {styles.button}
             labelStyle = {styles.label}
             type = "submit"
-            label = '注册'
-            secondary = {true}
-          />
+            label = "登录"
+            secondary = {true} />
         </form>
       </div>
     );
   }
+
 }
 
-SignUp.contextTypes = {
+LogIn.contextTypes = {
   router: React.PropTypes.object.isRequired
 };
 
-export default Radium( SignUp );
+export default Radium( LogIn );
