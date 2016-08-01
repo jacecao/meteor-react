@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 //import { Link } from 'react-router';
+
+//radium 媒体查询器响应模块，必须加载该模块，组件中媒体查询样式才会生效
 import Radium from 'radium';
 
 //import { white } from 'material-ui/styles/colors';
