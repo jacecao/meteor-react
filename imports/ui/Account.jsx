@@ -8,30 +8,53 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Radium from 'radium';
 
 import { HTTP } from 'meteor/http';
+import { Meteor } from 'meteor/meteor';
+import { createContainer } from 'meteor/react-meteor-data'
 
 import isEmpty from 'lodash/fp/isEmpty';
 import UserInfo from './user/UserInfo.jsx';
+import '../api/users.js';
 
 class Account extends Component {
 	
 	constructor(props) {
 		super( props );
 		this.state = {
-			user: {}
+			user: {},
+			//这里主要是避免重复提交，搜索按钮初始状态为活跃状态
+			active: true
 		};
 	}
 
 	handleSubmit(e) {
 		e.preventDefault();
+		//搜索按钮在数据请求过程中禁用
+		this.setState({ active: false });
 		const username = this.refs.username.getValue();
-		const url = 'https://api.github.com/users/' + username;
+		//ES6中允许在模板字符串中添加变量，模板字符串必须使用反引号标记，变量名必须要写在${}中
+		const url = `https://api.github.com/users/${username}`;
 
 		HTTP.call('get', url, (error, res) => {
 			if(error){
 				console.log(error);
 			}else{
-				this.setState({ user: JSON.parse(res.content)});
+				this.setState({ 
+					user: JSON.parse(res.content),
+					//搜索按钮再次激活
+					active: true
+				});
 			}
+		});
+	}
+
+	handleClick(e) {
+		e.preventDefault();
+		Meteor.call('update/user', this.state.user, (error) =>{
+			if( error ){
+				console.log(error);
+				return;
+			}
+			this.context.router.push('/chat');
 		});
 	}
 
@@ -53,7 +76,7 @@ class Account extends Component {
 		};
 
 		let GithubInfo;
-
+		let currentUser = this.props.currentUser;
 		if( !isEmpty(this.state.user) ) {
 			GithubInfo = (
 				<div>
@@ -62,9 +85,12 @@ class Account extends Component {
 						style = {{display: 'block',margin:'30px auto 0',width:'180px'}}
 						secondary = {true}
 						label = 'save'
+						onClick = { this.handleClick.bind(this) }
 					/>
 				</div>
 			);
+		}else if( currentUser && currentUser.avatar_url ){
+			GithubInfo = (<UserInfo userInfo = { this.props.currentUser } />);
 		}
 
 		return (
@@ -77,7 +103,8 @@ class Account extends Component {
 						/>
 						<FlatButton 
 							type = 'submit'
-							primary = {true}
+							primary = { this.state.active }
+							disabled={ !this.state.active }
 							label = 'search github'
 						/>
 					</form>
@@ -88,4 +115,11 @@ class Account extends Component {
 	}
 }
 
-export default Radium( Account );
+Account.contextTypes = { 
+	router: React.PropTypes.object.isRequired 
+};
+
+export default createContainer( () => {
+	Meteor.subscribe('userInfo');
+	return { currentUser: Meteor.user()};
+}, Radium( Account ) );
