@@ -34,7 +34,7 @@ class SignUp extends Component {
         minHeight: '400px',
         textAlign: 'center',
         padding: '6em 2em',
-        '@media (min-width: 500px)' : {
+        '@media (min-width: 500px)': {
           width: '500px',
           margin: '0 auto'
         }

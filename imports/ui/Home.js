@@ -33,7 +33,7 @@ class Home extends Component {
         paddingTop: '50px',
         paddingBottom: '50px',
         backgroundColor: 'rgba(0,0,0,0.5)',
-        '@media (min-width: 600px)' : {
+        '@media (min-width: 600px)': {
           fontSize: '50px',
           paddingBottom: '100px',
           paddingTop: '100px'

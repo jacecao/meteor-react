@@ -72,19 +72,22 @@ class LogIn extends Component {
             ref = "userName"
             style = {styles.textField}
             floatingLabelText = "用户名"
-            floatingLabelStyle = {styles.floatingLabel} />
+            floatingLabelStyle = {styles.floatingLabel} 
+          />
           <TextField
             ref = "password"
             style = {styles.textField}
             floatingLabelText = "密码"
             floatingLabelStyle = {styles.floatingLabel}
-            type = "password" />
+            type = "password" 
+          />
           <RaisedButton
             style = {styles.button}
             labelStyle = {styles.label}
             type = "submit"
             label = "登录"
-            secondary = {true} />
+            secondary = {true} 
+          />
         </form>
       </div>
     );

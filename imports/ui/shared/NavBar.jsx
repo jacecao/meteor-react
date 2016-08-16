@@ -54,6 +54,7 @@ class NavBar extends Component {
 
 		let styles = {
 			root: {
+				flexShrink: '0',
 				height: '64px',
 				backgroundColor: blue,
 				boxShadow: '0 1px 6px rgba(0,0,0,0.12),0 1px 4px rgba(0,0,0,0.24)'
