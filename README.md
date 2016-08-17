@@ -11,9 +11,9 @@ meteor模拟服务器端的数据交互
 
 演示动画如下（加载时间有点长哦）  
 
-![image](https://raw.githubusercontent.com/jacecao/gif-img/master/demo-1.gif)   
+![image](https://raw.githubusercontent.com/jacecao/gif-img/master/meteor-react-1.gif.gif)   
 
-![image](https://raw.githubusercontent.com/jacecao/gif-img/master/demo-2.gif)
+![image](https://raw.githubusercontent.com/jacecao/gif-img/master/meteor-react-2.gif.gif)
 
 该项目非常适合刚接触React的朋友  
 另外本应用大部分代码采用ES6的书写方式  
