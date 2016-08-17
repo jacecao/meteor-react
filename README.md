@@ -11,7 +11,7 @@ meteor模拟服务器端的数据交互
 
 演示动画如下（加载时间有点长哦）  
 
-![image](http://thumbnail0.baidupcs.com/thumbnail/4ea325760c26afbb7260230591bcfb03?fid=4010390245-250528-921921635387466&time=1471417200&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-Odyt7DnNOQRQCf6hYLBPvof5bIM%3D&expires=2h&chkv=0&chkbd=0&chkpc=&dp-logid=661633763&dp-callid=0&size=c850_u580&quality=100)   
+![image](https://github.com/jacecao/Carousel/blob/master/img/sbanner_05.png?raw=true)   
 
 ![image](http://thumbnail0.baidupcs.com/thumbnail/f27c2c01a114d228f610e54404af4560?fid=4010390245-250528-78194571272110&time=1471417200&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-1eZWW3LxJWgAsFzCyw9%2FFi7e2yE%3D&expires=2h&chkv=0&chkbd=0&chkpc=&dp-logid=661633763&dp-callid=0&size=c850_u580&quality=100)
 
